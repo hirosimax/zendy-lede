@@ -1,0 +1,102 @@
+/**
+ * Settings page
+ */
+
+.zendy-lede-wrap{
+	margin-top: 20px; 
+	background: #fff;
+	border-top: 4px solid #000;
+	min-width: 400px;
+	padding-bottom: 10px;
+}
+.zendy-lede-header{
+	height:300px; 
+	width: 100%; 
+	background: #b7dee2;	
+	position: relative;
+}
+.zendy-lede-tabs{
+	padding-left: 28px !important;	
+	border: none;
+	position: absolute;
+	bottom: 0px;
+	z-index: 50;
+	
+}
+.zendy-lede-form-wrapper{
+	padding: 0 30px; 
+	background: #fff;	
+}
+.wrap h2.zendy-lede-form-title{
+	font-weight: bold;
+	padding-top: 30px;
+}
+.wrap h2.zendy-lede-form-title small{
+	font-size: 14px;
+}
+.zendy-lede-logo{
+	float: left;
+}
+h1.zendy-lede-title{
+	padding-top: 40px;
+	font-size: 24px;
+	line-height: 32px;
+	margin-top: 0;
+	margin-bottom: 15px;
+	
+}
+h3.zendy-lede-title{
+	font-size: 16px;
+	line-height: 24px;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+h1.zendy-lede-title, h3.zendy-lede-title{
+}
+.zendy-lede-title{
+	margin-right: 60px 
+}
+.nav-tab{
+}
+.nav-tab-active, .nav-tab-active:hover{
+	background: #fff;
+	z-index: 9999;
+	border-bottom: 1px solid #fff;
+}
+.zendy-clear{
+	clear: both;
+}
+.zendy-updated, .zendy-error{
+	background: #fff;
+	padding: 16px 20px;
+	margin: 20px 20px 0 0;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: bold;
+}
+.zendy-updated{
+	border-left: 10px solid #288f2f;
+}
+.zendy-error{
+	border-left: 10px solid #b80808;
+}
+.zendy-lede-wrap .updated{
+	display: none !important;
+}
+.zendy-lede-form-wrapper h2, .zendy-lede-form-wrapper h3{
+	display: none;
+	
+}
+@media all and (max-width: 600px){
+	.zendy-lede-logo{
+		display: none;
+	}
+	.zendy-lede-header h1, .zendy-lede-header h3, .zendy-lede-header p{
+		padding-left: 30px;
+	}
+}
+code{
+	background: #ccc;
+	border-radius: 2px;
+	padding: 4px;
+}

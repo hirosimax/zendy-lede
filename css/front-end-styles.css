@@ -1,0 +1,72 @@
+/* This is necessary to avoid flickers and weird dimensions during the video re-sizing process. The body.home element is shown as soon as the video is ready to play */
+body.home{
+	display: none;
+}
+
+/* 
+===============
+VIDEO
+===============
+*/   
+#zendy-lede-media-wrapper{
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	z-index: 100;
+}
+
+#zendy-lede-video{
+	position: absolute;
+	max-width: none !important;
+	max-height: none !important;
+}
+
+#zendy-lede-overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: rgba(0,0,0,0.5);
+	z-index: 200;
+}
+
+#zendy-lede-text-wrapper{
+	position: absolute;
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	z-index: 300;
+	color: #FFF;
+	font-size: 18px;
+	text-shadow: 0px 1px 0px rgba(0,0,0,0.8);
+}
+
+#zendy-lede-text-wrapper h1, #zendy-lede-text-wrapper h2, #zendy-lede-text-wrapper a{
+	color: #FFF;
+	max-width: 380px;
+	margin: 0px auto
+}
+
+#zendy-lede-text-wrapper h1{
+	font-size: 36px;
+	line-height: 36px;
+	padding-bottom: 20px;
+}
+#zendy-lede-text-wrapper h1 img{
+	width: 100%;
+}
+#zendy-lede-text-wrapper h2{
+	font-size: 24px;
+	line-height: 24px;
+	padding-bottom: 20px;
+}
+#zendy-lede-info{
+	width: 100%;
+	position: absolute;
+	z-index: 400;
+}
+#zendy-lede-info a{
+	display: block;
+}
