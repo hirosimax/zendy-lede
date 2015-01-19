@@ -74,7 +74,8 @@ function setDimensions(){
 		   
 }
 
-var frontpagePath;
+var frontpagePath = "";
+
 
 //when site loads, we adjust the heights of the sections
 jQuery( document ).ready(function(){
@@ -82,7 +83,7 @@ jQuery( document ).ready(function(){
 	
 
 	jQuery.post(
-		'/wp-admin/admin-ajax.php',
+		frontpagePath + 'wp-admin/admin-ajax.php',
 		{ action: 'zendy_lede_get_frontpage_path' },
 		function( frontpagePathResponse ){
 			
@@ -96,7 +97,7 @@ jQuery( document ).ready(function(){
 				var data = {};
 				data.action = 'zendy_lede_get_lede_html';
 				jQuery.post(
-					'/wp-admin/admin-ajax.php', 
+					frontpagePath + 'wp-admin/admin-ajax.php', 
 					data,
 					function( ledeHTML ){
 		
