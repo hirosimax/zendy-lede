@@ -74,41 +74,58 @@ function setDimensions(){
 		   
 }
 
+var frontpagePath;
+
 //when site loads, we adjust the heights of the sections
 jQuery( document ).ready(function(){
 
-	if( window.location.pathname === '/' ){
+	
 
-		var data = {};
-		data.action = 'zendy_lede_get_lede_html';
-		jQuery.post(
-			'/wp-admin/admin-ajax.php', 
-			data,
-			function( ledeHTML ){
+	jQuery.post(
+		'/wp-admin/admin-ajax.php',
+		{ action: 'zendy_lede_get_frontpage_path' },
+		function( frontpagePathResponse ){
+			
+			var frontpagePath = frontpagePathResponse;
+			
+			console.log( window.location.href );
+			console.log( frontpagePath );
+			
+			if( window.location.href === frontpagePath ){
+		
+				var data = {};
+				data.action = 'zendy_lede_get_lede_html';
+				jQuery.post(
+					'/wp-admin/admin-ajax.php', 
+					data,
+					function( ledeHTML ){
+		
+						jQuery('body.home').prepend( ledeHTML );
+						setDimensions();
+						jQuery('#zendy-lede-text-wrapper').click(function(){
+							jQuery('#zendy-lede-video').get(0).play();
+						});
+						jQuery('#zendy-lede-video').on('loadstart', function(evt){
+		
+							jQuery('body.home').fadeIn(500);
+						});
+						jQuery('#zendy-lede-info').click(function(evt){
+							evt.preventDefault();
+							jQuery('html, body').animate({
+						        scrollTop: jQuery("#zendy-lede-bottom-border").offset().top
+						    }, 500);
+						});	
+					}			
+				);
+			}
+		}
+	);
 
-				jQuery('body.home').prepend( ledeHTML );
-				setDimensions();
-				jQuery('#zendy-lede-text-wrapper').click(function(){
-					jQuery('#zendy-lede-video').get(0).play();
-				});
-				jQuery('#zendy-lede-video').on('loadstart', function(evt){
-
-					jQuery('body.home').fadeIn(500);
-				});
-				jQuery('#zendy-lede-info').click(function(evt){
-					evt.preventDefault();
-					jQuery('html, body').animate({
-				        scrollTop: jQuery("#zendy-lede-bottom-border").offset().top
-				    }, 500);
-				});	
-			}			
-		);
-	}
 });
 
 //when resizing the site, we adjust the heights of the sections
 jQuery(window).resize(function() {
-	if( window.location.pathname === '/' ){
+	if( window.location.href === frontpagePath ){
     	setDimensions();
     }
 });
