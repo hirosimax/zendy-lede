@@ -3,8 +3,8 @@ Contributors: ZendyLabs
 Donate link: http://hq.zendy.net/wordpress/plugins/lede/donate/
 Tags: video, background, splash, fullscreen
 Requires at least: 4.0
-Tested up to: 4.0
-Stable tag: 0.9.5
+Tested up to: 4.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,22 @@ No. At this point, Zendy Lede is 100% HTML5. We plan on adding Flash fallback su
 3. The settings page
 
 == Changelog ==
+
+= 1.1.3 =
+* Fix: Added click event to allow video play on iOS
+
+= 1.1.2 =
+* Fix: Changed text-shadow to make text overlay easier to read.
+
+= 1.1.1 =
+* Fix: Removed dark overlay; text might be harder to read, but video is playable on iOS.
+
+= 1.1 =
+* Feature: Added option to not display heading text or image
+
+= 1.0 =
+* Fix: WordPress wp_ajax_nopriv hook is now working properly
+* Fix: Now using HTML5 video loadstart event to fire fade-in
 
 = 0.9.6 =
 * Meta: Split Git / SVN into different projects

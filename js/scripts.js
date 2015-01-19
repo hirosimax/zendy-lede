@@ -76,16 +76,23 @@ function setDimensions(){
 
 //when site loads, we adjust the heights of the sections
 jQuery( document ).ready(function(){
+
 	if( window.location.pathname === '/' ){
+
 		var data = {};
 		data.action = 'zendy_lede_get_lede_html';
 		jQuery.post(
 			'/wp-admin/admin-ajax.php', 
 			data,
 			function( ledeHTML ){
+
 				jQuery('body.home').prepend( ledeHTML );
 				setDimensions();
-				jQuery('#zendy-lede-video').on('canplay', function(evt){
+				jQuery('#zendy-lede-text-wrapper').click(function(){
+					jQuery('#zendy-lede-video').get(0).play();
+				});
+				jQuery('#zendy-lede-video').on('loadstart', function(evt){
+
 					jQuery('body.home').fadeIn(500);
 				});
 				jQuery('#zendy-lede-info').click(function(evt){

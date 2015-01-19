@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Zendy Lede
-Version: 0.9.6
+Version: 1.1.3
 Plugin URI: https://hq.zendy.net/wordpress/plugins/lede/
 Author: Zendy Labs
 Author URI: https://hq.zendy.net/
@@ -38,6 +38,10 @@ if ( !function_exists ( 'zendy_lede_styles' ) ){
 if ( !function_exists ( 'zendy_lede_scripts' ) ){
 	function zendy_lede_scripts(){
 		wp_register_script( 'zendy_lede_scripts', plugins_url( 'js/scripts.js', __FILE__ ), array( 'jquery' ), false, true );
+		$params = array(
+	        'wp_admin_ajax_url'  => admin_url("admin-ajax.php"),
+	    );
+		wp_localize_script( 'zendy_lede_scripts', 'frontEndParams', $params );
 		wp_enqueue_script( 'zendy_lede_scripts' );
 	}
 }
@@ -179,6 +183,7 @@ if ( !function_exists( 'zendy_lede_select_field_heading_type_render' ) ){
 		$options = get_option( 'zendy_lede_settings' );
 		?>
 		<select name='zendy_lede_settings[zendy_lede_select_field_heading_type]'>
+			<option value='none' <?php selected( $options['zendy_lede_select_field_heading_type'], 'none' ); ?>>None</option>
 			<option value='image' <?php selected( $options['zendy_lede_select_field_heading_type'], 'image' ); ?>>Image</option>
 			<option value='text' <?php selected( $options['zendy_lede_select_field_heading_type'], 'text' ); ?>>Text</option>
 		</select>
@@ -384,10 +389,14 @@ if ( !function_exists( 'zendy_lede_options_page' ) ){
  * =======================
  */
 
-add_action("wp_ajax_zendy_lede_get_lede_html", "zendy_lede_get_lede_html");
+add_action( 'wp_ajax_zendy_lede_get_lede_html', 'zendy_lede_get_lede_html_callback' );
+add_action( 'wp_ajax_nopriv_zendy_lede_get_lede_html', 'zendy_lede_get_lede_html_callback' );
 
-if ( !function_exists( 'zendy_lede_get_lede_html' ) ){
-	function zendy_lede_get_lede_html(){
+//add_action("wp_ajax_zendy_lede_get_lede_html", "zendy_lede_get_lede_html");
+//add_action("wp_ajax_nopriv_zendy_lede_get_lede_html", "zendy_lede_get_lede_html");
+
+if ( !function_exists( 'zendy_lede_get_lede_html_callback' ) ){
+	function zendy_lede_get_lede_html_callback(){
 		$options = get_option( 'zendy_lede_settings' );
 		?>
 		
@@ -406,26 +415,30 @@ if ( !function_exists( 'zendy_lede_get_lede_html' ) ){
 		<!-- TEXT / HEADING / LINKS -->
 		<div id="zendy-lede-text-wrapper">
 			<?php
+			if( $options['zendy_lede_select_field_heading_type'] !== 'none' ){
 				if( $options['zendy_lede_select_field_heading_type'] == 'text' ){
 					?>
 					<h1 id="zendy-lede-heading"><?php echo $options['zendy_lede_textarea_field_heading'] ? $options['zendy_lede_textarea_field_heading'] : 'Heading' ?></h1>
 					<h2 id="zendy-lede-subheading"><?php echo $options['zendy_lede_textarea_field_subheading'] ? $options['zendy_lede_textarea_field_subheading'] : 'Subheading' ?></h2>
 					<?php
-				}else{
+				}elseif( $options['zendy_lede_select_field_heading_type'] == 'image' ){
 					?>
 					<h1 id="zendy-lede-heading"><img src="<?php echo $options['zendy_lede_text_field_heading_image_url'] ?>" /></h1>
 					<?php	
 				}
 				?>
-			<div id="zendy-lede-cta"><a href="<?php echo $options['zendy_lede_text_field_cta_link'] ? $options['zendy_lede_text_field_cta_link'] : '#' ?>"><?php echo $options['zendy_lede_text_field_cta'] ? $options['zendy_lede_text_field_cta'] : 'Call To Action' ?> <i class="fa fa-caret-right"></i></a></div>
+				<div id="zendy-lede-cta"><a href="<?php echo $options['zendy_lede_text_field_cta_link'] ? $options['zendy_lede_text_field_cta_link'] : '#' ?>"><?php echo $options['zendy_lede_text_field_cta'] ? $options['zendy_lede_text_field_cta'] : 'Call To Action' ?> <i class="fa fa-caret-right"></i></a></div>
+			<?
+			} 
+			?>
 			<div id="zendy-lede-info"><a href="#"><?php echo $options['zendy_lede_text_field_info'] ? $options['zendy_lede_text_field_info'] : 'More Info' ?><br><i class="fa fa-caret-down"></i></a></div>
 		</div>
 		
 		<!-- THIS IS USED FOR STYLING AND TO AUTO-SCROLL TO CONTENT -->
 		<div id="zendy-lede-bottom-border"></div>
 		<?
-		// Adding "die()" here prevents wp_ajax from returning an extra 0 character
-		die();
+		// Adding "exit()" here prevents wp_ajax from returning an extra 0 character
+		exit();
 	}
 }
 
