@@ -4,7 +4,7 @@ Donate link: http://hq.zendy.net/wordpress/plugins/lede/donate/
 Tags: video, background, splash, fullscreen
 Requires at least: 4.0
 Tested up to: 4.1
-Stable tag: 1.1.2
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ No. At this point, Zendy Lede is 100% HTML5. We plan on adding Flash fallback su
 3. The settings page
 
 == Changelog ==
+
+= 1.1.4 =
+* Fix: Now works with sites that have a root other than /
 
 = 1.1.3 =
 * Fix: Added click event to allow video play on iOS
