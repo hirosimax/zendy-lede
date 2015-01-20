@@ -81,16 +81,13 @@ var frontpagePath = "";
 jQuery( document ).ready(function(){
 
 	
-
+//now checking the blog URL before doing jQuery post()
 	jQuery.post(
 		frontpagePath + 'wp-admin/admin-ajax.php',
 		{ action: 'zendy_lede_get_frontpage_path' },
 		function( frontpagePathResponse ){
 			
 			var frontpagePath = frontpagePathResponse;
-			
-			console.log( window.location.href );
-			console.log( frontpagePath );
 			
 			if( window.location.href === frontpagePath ){
 		

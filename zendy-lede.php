@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Zendy Lede
-Version: 1.1.3
+Version: 1.1.5
 Plugin URI: https://hq.zendy.net/wordpress/plugins/lede/
 Author: Zendy Labs
 Author URI: https://hq.zendy.net/
